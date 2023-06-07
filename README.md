@@ -1,4 +1,13 @@
+<p align="center">
+    <a href="https://github.com/Tetranyble/article" target="_blank">
+        <img src="https://avatars.githubusercontent.com/u/35098334?v=4" 
+alt="Ekenekiso Ugbanawaji Leonard" width="100">
+    </a>
+</p>
 
+<p align="center">
+
+</p>
 
 ## About Article 
 

@@ -12,12 +12,12 @@ use Illuminate\Support\Facades\Response;
 /**
  * @OA\Info(
  *      version="1.0.0",
- *      termsOfService="THe api is subject to terms of services and maybe be changed without service notice",
- *      title="Harde Business School API Docs",
- *      description="Harde Business School Application Programme Interface",
+ *      termsOfService="The Article api is subject to terms of services and maybe be changed without service notice",
+ *      title="Article Api",
+ *      description="Article Application Programme Interface",
  *      x={
  *          "logo": {
- *              "url": "https://hardeuniversity.org/assets/img/logo.png"
+ *              "url": "https://avatars.githubusercontent.com/u/35098334?v=4"
  *          }
  *      },
  *
