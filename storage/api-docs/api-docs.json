@@ -1,0 +1,735 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Harde Business School API Docs",
+        "description": "Harde Business School Application Programme Interface",
+        "termsOfService": "THe api is subject to terms of services and maybe be changed without service notice",
+        "contact": {
+            "name": "Ekenekiso Leonard Ugbanawaji",
+            "url": "https://harde.io/support",
+            "email": "leonard@hardeverse.org"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0",
+        "x-logo": {
+            "url": "https://hardeuniversity.org/assets/img/logo.png"
+        }
+    },
+    "servers": [
+        {
+            "url": "http://article.test/api/v1",
+            "description": "Article API Local Server. This server is attached to the local environment."
+        },
+        {
+            "url": "http://article.test/api/v1"
+        }
+    ],
+    "paths": {
+        "/articles": {
+            "get": {
+                "tags": [
+                    "Articles"
+                ],
+                "summary": "The Article paginated resource  collection",
+                "description": "The Article resource collection",
+                "operationId": "Api/ArticleController::index",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Search term to filter",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "quantity",
+                        "in": "query",
+                        "description": "The resource per page",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The paginated Article resource collection",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ArticleResource"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/422"
+                    },
+                    "default": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            }
+        },
+        "/articles/{article}": {
+            "get": {
+                "tags": [
+                    "Articles"
+                ],
+                "summary": "The Article resource",
+                "description": "The Article resource",
+                "operationId": "Api/ArticleController::show",
+                "parameters": [
+                    {
+                        "name": "article",
+                        "in": "path",
+                        "description": "The Article resource ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The Article resource",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ArticleResource"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/422"
+                    },
+                    "default": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            }
+        },
+        "/articles/{articleId}/like": {
+            "get": {
+                "tags": [
+                    "Articles"
+                ],
+                "summary": "The Article like count",
+                "description": "The Article like count",
+                "operationId": "Api/ArticleLikeController::invoke",
+                "parameters": [
+                    {
+                        "name": "articleId",
+                        "in": "path",
+                        "description": "The Article resource ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "like_count": 3844
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/422"
+                    },
+                    "default": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            }
+        },
+        "/articles/{articleId}/view": {
+            "get": {
+                "tags": [
+                    "Articles"
+                ],
+                "summary": "The Article view count",
+                "description": "The Article view count",
+                "operationId": "Api/ArticleViewController::invoke",
+                "parameters": [
+                    {
+                        "name": "articleId",
+                        "in": "path",
+                        "description": "The Article resource ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "view_count": 38464
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/422"
+                    },
+                    "default": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            }
+        },
+        "/articles/{articleId}/comment": {
+            "get": {
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "The Comment paginated resource  collection",
+                "description": "The Comment resource collection",
+                "operationId": "Api/CommentController::index",
+                "parameters": [
+                    {
+                        "name": "articleId",
+                        "in": "path",
+                        "description": "The article resource Id",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "quantity",
+                        "in": "query",
+                        "description": "The resource per page",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The paginated Comment resource collection",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CommentResource"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/422"
+                    },
+                    "default": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            }
+        },
+        "/articles/{articleId}/comment/{commentId}": {
+            "get": {
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "The Comment resource",
+                "description": "The Comment resource",
+                "operationId": "Api/CommentController::show",
+                "parameters": [
+                    {
+                        "name": "articleId",
+                        "in": "path",
+                        "description": "The Article resource ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "commentId",
+                        "in": "path",
+                        "description": "The comment resource Id",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The Comment resource",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CommentResource"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/422"
+                    },
+                    "default": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "GeneralRequest": {
+                "properties": {
+                    "quantity": {
+                        "description": "The pagination quantity",
+                        "type": "integer"
+                    },
+                    "search": {
+                        "description": "The search term",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "ArticleResource": {
+                "properties": {
+                    "title": {
+                        "description": "The resource cover title",
+                        "type": "string"
+                    },
+                    "cover": {
+                        "description": "The resource cover image url",
+                        "type": "string"
+                    },
+                    "thumbnail": {
+                        "description": "The resource thumbnail image url",
+                        "type": "string"
+                    },
+                    "article": {
+                        "description": "The resource text content",
+                        "type": "string"
+                    },
+                    "views": {
+                        "description": "The resource view count",
+                        "type": "integer"
+                    },
+                    "likes": {
+                        "description": "The resource like count",
+                        "type": "integer"
+                    },
+                    "created_at": {
+                        "description": "The resource creation date",
+                        "type": "string"
+                    },
+                    "updated_at": {
+                        "description": "The resource last updated date",
+                        "type": "string"
+                    },
+                    "author": {
+                        "description": "The Article resource author",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "CommentResource": {
+                "properties": {
+                    "subject": {
+                        "description": "The Tag resource subject.",
+                        "type": "string"
+                    },
+                    "url": {
+                        "description": "The Tag resource body.",
+                        "type": "string"
+                    },
+                    "author": {
+                        "description": "The resource Author.",
+                        "type": "string"
+                    },
+                    "articleId": {
+                        "description": "The resource Article reference Id.",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "TagResource": {
+                "properties": {
+                    "label": {
+                        "description": "The Tag resource label.",
+                        "type": "string"
+                    },
+                    "url": {
+                        "description": "The Tag resource url.",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Article": {
+                "properties": {
+                    "cover": {
+                        "description": "The resource cover title",
+                        "type": "string"
+                    },
+                    "article": {
+                        "description": "The resource text content",
+                        "type": "string"
+                    },
+                    "views": {
+                        "description": "The resource view count",
+                        "type": "integer"
+                    },
+                    "likes": {
+                        "description": "The resource like count",
+                        "type": "integer"
+                    },
+                    "created_at": {
+                        "description": "The resource creation date",
+                        "type": "string"
+                    },
+                    "updated_at": {
+                        "description": "The resource last updated date",
+                        "type": "string"
+                    },
+                    "author": {
+                        "description": "The Article resource author",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Comment": {
+                "properties": {
+                    "subject": {
+                        "description": "The resource subject",
+                        "type": "string"
+                    },
+                    "body": {
+                        "description": "The resource body",
+                        "type": "string"
+                    },
+                    "user_id": {
+                        "description": "The resource Author Id",
+                        "type": "integer"
+                    },
+                    "article_id": {
+                        "description": "The resource Article being commented on.",
+                        "type": "integer"
+                    },
+                    "created_at": {
+                        "description": "The resource creation date",
+                        "type": "string"
+                    },
+                    "updated_at": {
+                        "description": "The resource last updated date",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Tag": {
+                "properties": {
+                    "label": {
+                        "description": "The resource label",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "responses": {
+            "200": {
+                "description": "Ok.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "example": {
+                            "message": "Ok.",
+                            "errors": []
+                        }
+                    }
+                }
+            },
+            "201": {
+                "description": "Created.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "example": {
+                            "message": "Created.",
+                            "errors": []
+                        }
+                    }
+                }
+            },
+            "202": {
+                "description": "Accepted.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "example": {
+                            "message": "Created.",
+                            "errors": []
+                        }
+                    }
+                }
+            },
+            "204": {
+                "description": "No Content.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "example": {
+                            "message": "No Content.",
+                            "errors": []
+                        }
+                    }
+                }
+            },
+            "400": {
+                "description": "Bad Request.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "example": {
+                            "message": "Bad Request.",
+                            "errors": []
+                        }
+                    }
+                }
+            },
+            "401": {
+                "description": "Unauthenticated.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "example": {
+                            "message": "Unauthenticated.",
+                            "errors": []
+                        }
+                    }
+                }
+            },
+            "403": {
+                "description": "Forbidden.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "example": {
+                            "message": "Forbidden.",
+                            "errors": []
+                        }
+                    }
+                }
+            },
+            "404": {
+                "description": "Resource Not Found.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "example": {
+                            "message": "Resource Not Found.",
+                            "errors": []
+                        }
+                    }
+                }
+            },
+            "413": {
+                "description": "Request Entity Too Large.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "example": {
+                            "message": "Request Entity Too Large.",
+                            "errors": []
+                        }
+                    }
+                }
+            },
+            "422": {
+                "description": "Unprocessable Entity.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "example": {
+                            "message": "Unprocessable Entity.",
+                            "errors": []
+                        }
+                    }
+                }
+            },
+            "423": {
+                "description": "Locked.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "example": {
+                            "message": "Locked.",
+                            "errors": []
+                        }
+                    }
+                }
+            },
+            "500": {
+                "description": "Server Error.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "example": {
+                            "message": "Server Error.",
+                            "errors": []
+                        }
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "passport": {
+                "type": "oauth2",
+                "description": "Laravel passport oauth2 security.",
+                "in": "header",
+                "scheme": "https",
+                "flows": {
+                    "password": {
+                        "authorizationUrl": "http://localhost/oauth/authorize",
+                        "tokenUrl": "http://localhost/api/v1/login",
+                        "refreshUrl": "http://localhost/token/refresh",
+                        "scopes": []
+                    }
+                }
+            },
+            "sanctum": {
+                "type": "apiKey",
+                "description": "Enter token in format (Bearer <token>)",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Articles",
+            "description": "The Article resource endpoints."
+        },
+        {
+            "name": "Comments",
+            "description": "The Comment resource endpoints."
+        },
+        {
+            "name": "Tags",
+            "description": "The Tag resource endpoints."
+        }
+    ]
+}
